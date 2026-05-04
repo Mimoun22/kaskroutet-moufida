@@ -293,9 +293,42 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.querySelector('.nav-links').classList.toggle('active');
 });
 
+const WHATSAPP_NUMBER = '21695052879';
+
 document.getElementById('deliveryForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  alert(currentLang === 'en' ? 'Order placed successfully! We will contact you soon.' : 'تم إرسال الطلب بنجاح! سنتصل بك قريباً.');
+  if (cart.length === 0) {
+    alert(currentLang === 'en' ? 'Please add items to your cart first!' : 'يرجى إضافة عناصر للسلة أولاً!');
+    return;
+  }
+
+  const name = document.getElementById('fullName').value;
+  const phone = document.getElementById('phone').value;
+  const address = document.getElementById('address').value;
+  const notes = document.getElementById('notes').value;
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  let message = currentLang === 'en'
+    ? `*New Order - Kaskroutet Moufida*\n\n`
+    : `*طلب جديد - كسكروت مفيدة*\n\n`;
+
+  message += currentLang === 'en' ? `*Items:*\n` : `*العناصر:*\n`;
+  cart.forEach(item => {
+    message += `- ${item[currentLang].name} x${item.qty} = ${item.price * item.qty} دج\n`;
+  });
+
+  message += `\n*${currentLang === 'en' ? 'Total' : 'المجموع'}:* ${total} دج\n\n`;
+  message += `*${currentLang === 'en' ? 'Customer' : 'العميل'}:* ${name}\n`;
+  message += `*${currentLang === 'en' ? 'Phone' : 'الهاتف'}:* ${phone}\n`;
+  message += `*${currentLang === 'en' ? 'Address' : 'العنوان'}:* ${address}\n`;
+  if (notes) {
+    message += `*${currentLang === 'en' ? 'Notes' : 'ملاحظات'}:* ${notes}\n`;
+  }
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+
   cart = [];
   updateCart();
   e.target.reset();
