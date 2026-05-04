@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaskroutet Moufida</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">
+        <span class="logo-icon">&#x1F355;</span>
+        <span data-en="Kaskroutet Moufida" data-ar="كسكروت مفيدة">Kaskroutet Moufida</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home" data-en="Home" data-ar="الرئيسية">Home</a></li>
+        <li><a href="#menu" data-en="Menu" data-ar="قائمة الطعام">Menu</a></li>
+        <li><a href="#delivery" data-en="Delivery" data-ar="التوصيل">Delivery</a></li>
+        <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="langToggle" class="btn-lang">عربي</button>
+        <button id="cartToggle" class="btn-cart">
+          <span class="cart-icon">&#x1F6D2;</span>
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+      </div>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 data-en="Welcome to Kaskroutet Moufida" data-ar="مرحباً بكم في كسكروت مفيدة">Welcome to Kaskroutet Moufida</h1>
+      <p data-en="Delicious pizzas, sandwiches & more delivered to your door" data-ar="بيتزا لذيذة، ساندويتشات والمزيد توصل حتى باب دارك">Delicious pizzas, sandwiches & more delivered to your door</p>
+      <a href="#menu" class="btn btn-primary" data-en="Order Now" data-ar="اطلب الآن">Order Now</a>
+    </div>
+  </section>
+
+  <section id="menu" class="menu-section">
+    <h2 class="section-title" data-en="Our Menu" data-ar="قائمة الطعام">Our Menu</h2>
+    <div class="menu-tabs">
+      <button class="tab-btn active" data-category="pizza" data-en="Pizzas" data-ar="بيتزا">Pizzas</button>
+      <button class="tab-btn" data-category="sandwich" data-en="Sandwiches" data-ar="ساندويتشات">Sandwiches</button>
+      <button class="tab-btn" data-category="burger" data-en="Burgers" data-ar="برجر">Burgers</button>
+      <button class="tab-btn" data-category="drink" data-en="Drinks" data-ar="مشروبات">Drinks</button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <section id="delivery" class="delivery-section">
+    <div class="delivery-content">
+      <h2 class="section-title" data-en="Delivery Service" data-ar="خدمة التوصيل">Delivery Service</h2>
+      <div class="delivery-info">
+        <div class="delivery-card">
+          <div class="delivery-icon">&#x1F69A;</div>
+          <h3 data-en="Fast Delivery" data-ar="توصيل سريع">Fast Delivery</h3>
+          <p data-en="We deliver within 30 minutes" data-ar="نوصل في أقل من 30 دقيقة">We deliver within 30 minutes</p>
+        </div>
+        <div class="delivery-card">
+          <div class="delivery-icon">&#x1F4B0;</div>
+          <h3 data-en="Free Delivery" data-ar="توصيل مجاني">Free Delivery</h3>
+          <p data-en="Free for orders over 150 DZD" data-ar="مجاناً للطلبات فوق 150 دج">Free for orders over 150 DZD</p>
+        </div>
+        <div class="delivery-card">
+          <div class="delivery-icon">&#x1F4CD;</div>
+          <h3 data-en="Wide Coverage" data-ar="تغطية واسعة">Wide Coverage</h3>
+          <p data-en="We deliver to all city areas" data-ar="نوصل لكل أحياء المدينة">We deliver to all city areas</p>
+        </div>
+      </div>
+      <form class="delivery-form" id="deliveryForm">
+        <h3 data-en="Order Delivery" data-ar="طلب توصيل">Order Delivery</h3>
+        <div class="form-group">
+          <input type="text" id="fullName" placeholder=" " required>
+          <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+        </div>
+        <div class="form-group">
+          <input type="tel" id="phone" placeholder=" " required>
+          <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="address" placeholder=" " required>
+          <label data-en="Delivery Address" data-ar="عنوان التوصيل">Delivery Address</label>
+        </div>
+        <div class="form-group">
+          <textarea id="notes" placeholder=" " rows="3"></textarea>
+          <label data-en="Special Notes" data-ar="ملاحظات خاصة">Special Notes</label>
+        </div>
+        <button type="submit" class="btn btn-primary" data-en="Place Order" data-ar="إرسال الطلب">Place Order</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2 class="section-title" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">&#x1F4DE;</div>
+        <h3 data-en="Phone" data-ar="الهاتف">Phone</h3>
+        <p>+213 555 123 456</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">&#x1F4CD;</div>
+        <h3 data-en="Location" data-ar="الموقع">Location</h3>
+        <p data-en="Downtown, Main Street" data-ar="وسط المدينة، الشارع الرئيسي">Downtown, Main Street</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">&#x1F550;</div>
+        <h3 data-en="Hours" data-ar="أوقات العمل">Hours</h3>
+        <p data-en="11:00 AM - 11:00 PM" data-ar="11:00 ص - 11:00 م">11:00 AM - 11:00 PM</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3 data-en="Your Cart" data-ar="سلة المشتريات">Your Cart</h3>
+      <button id="closeCart" class="close-btn">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="empty-cart" data-en="Your cart is empty" data-ar="سلتك فارغة">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span data-en="Total:" data-ar="المجموع:">Total:</span>
+        <span id="cartTotal">0 DZD</span>
+      </div>
+      <a href="#delivery" class="btn btn-primary btn-checkout" id="checkoutBtn" data-en="Checkout" data-ar="إتمام الطلب">Checkout</a>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Kaskroutet Moufida. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
