@@ -293,9 +293,10 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.querySelector('.nav-links').classList.toggle('active');
 });
 
-const WHATSAPP_NUMBER = '21695052879';
+const TG_BOT_TOKEN = '8771600400:AAFJx26-eKAoRibnnfd5L1FXeVpS5TpGnOo';
+const TG_CHAT_ID = '7153141096';
 
-document.getElementById('deliveryForm').addEventListener('submit', (e) => {
+document.getElementById('deliveryForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   if (cart.length === 0) {
     alert(currentLang === 'en' ? 'Please add items to your cart first!' : 'يرجى إضافة عناصر للسلة أولاً!');
@@ -310,28 +311,42 @@ document.getElementById('deliveryForm').addEventListener('submit', (e) => {
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   let message = currentLang === 'en'
-    ? `*New Order - Kaskroutet Moufida*\n\n`
-    : `*طلب جديد - كسكروت مفيدة*\n\n`;
+    ? `🛒 *New Order - Kaskroutet Moufida*\n\n`
+    : `🛒 *طلب جديد - كسكروت مفيدة*\n\n`;
 
   message += currentLang === 'en' ? `*Items:*\n` : `*العناصر:*\n`;
   cart.forEach(item => {
-    message += `- ${item[currentLang].name} x${item.qty} = ${item.price * item.qty} دج\n`;
+    message += `▫️ ${item[currentLang].name} x${item.qty} = ${item.price * item.qty} دج\n`;
   });
 
-  message += `\n*${currentLang === 'en' ? 'Total' : 'المجموع'}:* ${total} دج\n\n`;
-  message += `*${currentLang === 'en' ? 'Customer' : 'العميل'}:* ${name}\n`;
-  message += `*${currentLang === 'en' ? 'Phone' : 'الهاتف'}:* ${phone}\n`;
-  message += `*${currentLang === 'en' ? 'Address' : 'العنوان'}:* ${address}\n`;
+  message += `\n💰 *${currentLang === 'en' ? 'Total' : 'المجموع'}:* ${total} دج\n\n`;
+  message += `👤 *${currentLang === 'en' ? 'Customer' : 'العميل'}:* ${name}\n`;
+  message += `📞 *${currentLang === 'en' ? 'Phone' : 'الهاتف'}:* ${phone}\n`;
+  message += `📍 *${currentLang === 'en' ? 'Address' : 'العنوان'}:* ${address}\n`;
   if (notes) {
-    message += `*${currentLang === 'en' ? 'Notes' : 'ملاحظات'}:* ${notes}\n`;
+    message += `📝 *${currentLang === 'en' ? 'Notes' : 'ملاحظات'}:* ${notes}\n`;
   }
 
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'جاري الإرسال...';
 
-  cart = [];
-  updateCart();
-  e.target.reset();
+  try {
+    await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: message, parse_mode: 'Markdown' })
+    });
+    alert(currentLang === 'en' ? 'Order sent! We will contact you soon.' : 'تم إرسال الطلب! سنتصل بك قريباً.');
+    cart = [];
+    updateCart();
+    e.target.reset();
+  } catch (err) {
+    alert(currentLang === 'en' ? 'Failed to send order. Please try again.' : 'فشل إرسال الطلب. حاول مرة أخرى.');
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = currentLang === 'en' ? 'Place Order' : 'إرسال الطلب';
 });
 
 renderMenu(currentCategory);
